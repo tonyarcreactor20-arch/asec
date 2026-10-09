@@ -1,0 +1,591 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#09090f">
+  <meta name="description" content="EditVerse - Professional video editing for creators, brands and social media.">
+  <title>EditVerse | Video Editing Studio</title>
+
+  <style>
+    :root {
+      --bg: #09090f;
+      --panel: #12121c;
+      --text: #f7f7ff;
+      --muted: #a5a5bb;
+      --accent: #a78bfa;
+      --accent2: #6d5dfc;
+      --border: #29283b;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    button, input { font: inherit; }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(9, 9, 15, .94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      min-height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover { color: white; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      background: linear-gradient(120deg, var(--accent2), #9b72ed);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border);
+    }
+
+    .hero {
+      padding: 90px 0 75px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 0%, #3b287355, transparent 60%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #8b75c855;
+      border-radius: 30px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 800px;
+      margin: 22px auto 16px;
+      font-size: clamp(38px, 7vw, 70px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #c4b5fd, #8b8bff, #e0c4ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 580px;
+      margin: 0 auto 28px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .section { padding: 65px 0; }
+
+    .section-heading {
+      margin-bottom: 28px;
+    }
+
+    .section-heading h2 {
+      margin: 8px 0;
+      font-size: clamp(28px, 5vw, 40px);
+      letter-spacing: -1px;
+    }
+
+    .section-heading p { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      min-width: 0;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: linear-gradient(145deg, #171724, #101018);
+    }
+
+    .card:hover { border-color: #7770b8; }
+
+    .icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 13px;
+      background: #8b5cf622;
+      font-size: 23px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 { margin: 0 0 8px; font-size: 20px; }
+
+    .card p { color: var(--muted); font-size: 14px; }
+
+    .card .btn { margin-top: 12px; width: 100%; }
+
+    .pricing-note {
+      margin-bottom: 22px;
+      padding: 17px;
+      border: 1px solid #8b5cf644;
+      background: #8b5cf610;
+      border-radius: 12px;
+      color: #ddd6fe;
+    }
+
+    .price {
+      font-size: 26px;
+      font-weight: 800;
+      margin: 16px 0;
+    }
+
+    .price small {
+      font-size: 13px;
+      font-weight: normal;
+      color: var(--muted);
+    }
+
+    .features {
+      padding-left: 19px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .features li { margin: 8px 0; }
+
+    .media-placeholder {
+      min-height: 155px;
+      display: grid;
+      place-items: center;
+      margin: -23px -23px 20px;
+      border-radius: 16px 16px 0 0;
+      background:
+        radial-gradient(circle at 50% 50%, #7357b855, transparent 60%),
+        #191827;
+      font-size: 42px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+
+    .article-card { margin-bottom: 18px; }
+
+    .article-card details { margin-top: 15px; }
+
+    .article-card summary {
+      color: #c4b5fd;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .article-content {
+      padding-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .contact-box {
+      padding: 35px 25px;
+      text-align: center;
+      border: 1px solid #8b5cf655;
+      border-radius: 20px;
+      background: radial-gradient(ellipse at top, #6d5dfc24, transparent 75%);
+    }
+
+    .contact-box h2 {
+      font-size: clamp(27px, 5vw, 42px);
+      margin: 8px 0;
+    }
+
+    .contact-box p { color: var(--muted); }
+
+    footer {
+      padding: 25px 0;
+      margin-top: 40px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero { padding: 65px 0 50px; }
+      .section { padding: 45px 0; }
+      .nav-inner { padding: 12px 0; flex-wrap: wrap; }
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+      .nav-links a { white-space: nowrap; }
+      .logo { font-size: 22px; }
+      .card { padding: 21px; }
+      .media-placeholder { margin: -21px -21px 18px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="#home">Edit<span>Verse.</span></a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#tutorials">Tutorials</a>
+        <a href="#articles">Articles</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <span class="eyebrow">Video Editing Studio</span>
+        <h1>Make Every Video<br><span class="gradient-text">Worth Watching.</span></h1>
+        <p>
+          Professional video editing for creators and brands.
+          Bring your ideas to life with EditVerse.
+        </p>
+
+        <div class="actions">
+          <a class="btn" href="#services">Explore Services ↗</a>
+          <a class="btn btn-outline" href="#tutorials">Watch Tutorials</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">What We Do</span>
+          <h2>Editing Services</h2>
+          <p>Choose the service that fits your content.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="icon">▶</div>
+            <h3>Instagram Reels</h3>
+            <p>Engaging short-form edits, clean cuts, captions,
+              transitions and music syncing.</p>
+            <a class="btn btn-outline order-link"
+               data-service="Instagram Reels" href="#contact">Request a Quote</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">✦</div>
+            <h3>Cinematic Editing</h3>
+            <p>Stylish visuals, cinematic color grading, smooth
+              transitions and storytelling.</p>
+            <a class="btn btn-outline order-link"
+               data-service="Cinematic Editing" href="#contact">Request a Quote</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">▣</div>
+            <h3>YouTube Videos</h3>
+            <p>Long-form editing, cuts, sound cleanup, subtitles
+              and creator-focused pacing.</p>
+            <a class="btn btn-outline order-link"
+               data-service="YouTube Videos" href="#contact">Request a Quote</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Flexible Pricing</span>
+          <h2>Choose Your Package</h2>
+          <p>Every project is different. Get a quote based on your needs.</p>
+        </div>
+
+        <div class="pricing-note">
+          ✦ Custom pricing — final cost depends on video length,
+          complexity, subtitles and delivery time.
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <span class="tag">Short Form</span>
+            <h3>Reels Edit</h3>
+            <div class="price">Custom <small>/ project</small></div>
+            <ul class="features">
+              <li>Instagram Reels and Shorts</li>
+              <li>Music and clean cuts</li>
+              <li>Captions if requested</li>
+            </ul>
+            <a class="btn order-link" data-service="Reels Edit"
+               href="#contact">Get a Quote</a>
+          </article>
+
+          <article class="card">
+            <span class="tag">Creative</span>
+            <h3>Cinematic Edit</h3>
+            <div class="price">Custom <small>/ project</small></div>
+            <ul class="features">
+              <li>Cinematic color grading</li>
+              <li>Transitions and storytelling</li>
+              <li>Music synchronization</li>
+            </ul>
+            <a class="btn order-link" data-service="Cinematic Edit"
+               href="#contact">Get a Quote</a>
+          </article>
+
+          <article class="card">
+            <span class="tag">Long Form</span>
+            <h3>YouTube Edit</h3>
+            <div class="price">Custom <small>/ project</small></div>
+            <ul class="features">
+              <li>Long-form video editing</li>
+              <li>Audio and pacing cleanup</li>
+              <li>Subtitles if requested</li>
+            </ul>
+            <a class="btn order-link" data-service="YouTube Edit"
+               href="#contact">Get a Quote</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tutorials">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Learn With EditVerse</span>
+          <h2>Video Tutorials</h2>
+          <p>Add your own tutorial links below so clients can learn your editing style.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="media-placeholder">▶</div>
+            <span class="tag">Tutorial 01</span>
+            <h3>Reels Editing Basics</h3>
+            <p>Learn your workflow for creating short-form videos.</p>
+            <a class="btn btn-outline tutorial-link"
+               href="https://www.youtube.com/"
+               target="_blank" rel="noopener">Watch Tutorial ↗</a>
+          </article>
+
+          <article class="card">
+            <div class="media-placeholder">▶</div>
+            <span class="tag">Tutorial 02</span>
+            <h3>Cinematic Color Grading</h3>
+            <p>Show your process for creating a cinematic look.</p>
+            <a class="btn btn-outline tutorial-link"
+               href="https://www.youtube.com/"
+               target="_blank" rel="noopener">Watch Tutorial ↗</a>
+          </article>
+
+          <article class="card">
+            <div class="media-placeholder">▶</div>
+            <span class="tag">Tutorial 03</span>
+            <h3>YouTube Editing Workflow</h3>
+            <p>Explain your editing process from raw footage to final video.</p>
+            <a class="btn btn-outline tutorial-link"
+               href="https://www.youtube.com/"
+               target="_blank" rel="noopener">Watch Tutorial ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="articles">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Editing Knowledge</span>
+          <h2>Articles & Guides</h2>
+          <p>Publish useful editing tips and guides for your clients.</p>
+        </div>
+
+        <article class="card article-card">
+          <span class="tag">Guide 01</span>
+          <h3>How to Prepare Footage for Editing</h3>
+          <p>A simple checklist before sending your video files.</p>
+          <details>
+            <summary>Read Article</summary>
+            <div class="article-content">
+              Organize your video clips into folders. Send the original
+              footage at its best available quality. Include your preferred
+              format, aspect ratio, reference videos, music preferences and
+              any required text. Mention the deadline before editing begins.
+            </div>
+          </details>
+        </article>
+
+        <article class="card article-card">
+          <span class="tag">Guide 02</span>
+          <h3>What Makes a Good Instagram Reel?</h3>
+          <p>Plan your content for a clearer and more engaging video.</p>
+          <details>
+            <summary>Read Article</summary>
+            <div class="article-content">
+              Start with a clear idea. Use an engaging opening, readable
+              captions, suitable music and purposeful cuts. Keep the video
+              focused on one message and use a vertical format when the
+              content is intended for Reels. Good editing supports a strong
+              idea; it cannot guarantee views or viral reach.
+            </div>
+          </details>
+        </article>
+
+        <article class="card article-card">
+          <span class="tag">Guide 03</span>
+          <h3>How to Request a Custom Editing Quote</h3>
+          <p>Help clients share the details needed for an accurate price.</p>
+          <details>
+            <summary>Read Article</summary>
+            <div class="article-content">
+              Share the video type, raw footage duration, desired final
+              length, reference link, subtitles or effects required and
+              delivery deadline. The editor can then estimate the work and
+              confirm the price before the project starts.
+            </div>
+          </details>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <span class="eyebrow">Let's Work Together</span>
+          <h2>Have a Video to Edit?</h2>
+          <p>Send your project details on Instagram to request a quote.</p>
+          <a class="btn" id="instagram-contact"
+             href="https://www.instagram.com/YOUR_INSTAGRAM_USERNAME/"
+             target="_blank" rel="noopener">
+            Message on Instagram ↗
+          </a>
+          <p style="font-size:12px">
+            Replace the sample Instagram username with your own.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="#home">Edit<span>Verse.</span></a>
+      <span>© <span id="year"></span> EditVerse. All rights reserved.</span>
+      <a href="#contact">Contact Us ↗</a>
+    </div>
+  </footer>
+
+  <script>
+    // CHANGE THIS to your actual Instagram username (without @).
+    const INSTAGRAM_USERNAME = "____Raj.777";
+
+    const profileURL =
+      "https://www.instagram.com/" +
+      encodeURIComponent(INSTAGRAM_USERNAME) + "/";
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    document.getElementById("instagram-contact").href = profileURL;
+
+    document.querySelectorAll(".order-link").forEach(function(link) {
+      link.href = profileURL;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.addEventListener("click", function() {
+        // The client can mention this service in their Instagram message.
+      });
+    });
+
+    // Replace each sample tutorial URL with your own published video URL.
+  </script>
+
+</body>
+</html>
